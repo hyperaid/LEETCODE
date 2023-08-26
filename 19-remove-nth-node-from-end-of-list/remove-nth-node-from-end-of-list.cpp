@@ -39,23 +39,49 @@ public:
         //     temp1->next=temp1->next->next;
         //     return head;
         // }
-         ListNode* start = new ListNode();
-        start -> next = head;
-        ListNode* fast=start;
-        ListNode* slow= start;
-        for(int i=0;i<n;i++){
-            fast=fast->next;
-        }
-        // if(head==NULL && n==1){
-        //     return NULL;
+        //  ListNode* start = new ListNode();
+        // start -> next = head;
+        // ListNode* fast=start;
+        // ListNode* slow= start;
+        // for(int i=0;i<n;i++){
+        //     fast=fast->next;
         // }
-        while(fast->next!=NULL){
-            slow=slow->next;
-            fast=fast->next;
+        // // if(head==NULL && n==1){
+        // //     return NULL;
+        // // }
+        // while(fast->next!=NULL){
+        //     slow=slow->next;
+        //     fast=fast->next;
 
+        // }
+        // slow->next=slow->next->next;
+        // return start->next;
+        ListNode *slow=head, *fast=head;
+
+        for(int i=0; i<n; i++)
+            fast = fast->next;
+
+        if(!fast)
+        {
+            head = head->next;
+            delete slow;    // Since slow points to the first node
+            return head;
         }
-        slow->next=slow->next->next;
-        return start->next;
+        
+        while(fast && fast->next)
+        {
+            fast = fast->next;
+            slow = slow->next;
+        }
+
+        if(slow && slow->next)
+        {
+            // ListNode* temp = slow->next;
+            slow->next = slow->next->next;
+            // delete temp;
+        }
+
+        return head;
        
         
         
