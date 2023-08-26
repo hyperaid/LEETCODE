@@ -74,12 +74,12 @@ public:
             slow = slow->next;
         }
 
-        if(slow && slow->next)
-        {
+        // if(slow && slow->next)
+        // {
             // ListNode* temp = slow->next;
             slow->next = slow->next->next;
             // delete temp;
-        }
+        // }
 
         return head;
        
