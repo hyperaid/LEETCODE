@@ -17,13 +17,16 @@ public:
         }
         if(dp==(d-1)){
             cout<<1<<endl;
-            TreeNode*a=root->left;
-            TreeNode*b=root->right;
+            
             TreeNode*ab=new TreeNode(val);
+            ab->left=root->left;
             root->left=ab;
-            root->right=new TreeNode(val);
-            root->left->left=a;
-            root->right->right=b;
+            TreeNode*cd=new TreeNode(val);
+            cd->right=root->right;
+
+            root->right=cd;
+            // root->left->left=a;
+            // root->right->right=b;
             return;
             
         }
