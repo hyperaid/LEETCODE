@@ -17,12 +17,9 @@ public:
     void dfs(TreeNode*root,string s,vector<string>&v1){
         if(root==NULL) return ;
         if(root->left==NULL && root->right==NULL){
-            // sum+=root->val;
             s=s+(char)(root->val+97);
-            cout<<s<<endl;
-            string a=s;
-            reverse(a.begin(),a.end());
-            v1.push_back(a);
+            reverse(s.begin(),s.end());
+            v1.push_back(s);
             return;
         }
         dfs(root->left,s+(char)(root->val+97),v1);
@@ -34,10 +31,7 @@ public:
         string s="";
         vector<string>v1;
         dfs(root,s,v1);
-        sort(v1.begin(),v1.end());
-        string a=v1[0];
-        // reverse(a.begin(),a.end());
-         
-        return a;
+        sort(v1.begin(),v1.end());         
+        return v1[0];
     }
 };
