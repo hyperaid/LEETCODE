@@ -11,21 +11,17 @@
  */
 class Solution {
 public:
-    bool check(TreeNode*root1,TreeNode*root2){
-         if(root1==NULL && root2==NULL){
-            return true;
-        }
-         if(root1==NULL || root2==NULL){
-            return false;
-        }
-        if (root1->val!=root2->val){
-            return false;
-        }
-        return check(root1->left,root2->right)&&check(root1->right,root2->left);
-    }
-    bool isSymmetric(TreeNode* head) {
-       if(head==NULL) return 1;
-       return check(head->left,head->right);
+    bool solve(TreeNode*r1,TreeNode*r2){
+        if(r1==NULL && r2==NULL) return true;
+        if(r1==NULL ||r2==NULL) return false;
+        if(r1->val!=r2->val) return false;
+        bool left=solve(r1->left,r2->right);
+        bool right=solve(r1->right,r2->left);
+        return left&& right;
 
+    }
+    bool isSymmetric(TreeNode* root) {
+        bool a= solve(root->left,root->right);
+        return a;
     }
 };
