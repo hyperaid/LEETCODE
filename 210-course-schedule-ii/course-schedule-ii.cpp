@@ -24,7 +24,7 @@ public:
         vector<int>pathvis(a,-1);
         int n=b.size();  
         for(int i=0;i<n;i++){
-           adj[b[i][1]].push_back(b[i][0]);
+           adj[b[i][0]].push_back(b[i][1]);
         }
         
         vector<int>vis(a,-1);
@@ -42,7 +42,7 @@ public:
             ans.push_back(st.top());
             st.pop();
         }
-        // reverse(ans.begin(),ans.end());
+        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
