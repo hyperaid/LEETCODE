@@ -11,10 +11,11 @@ public:
             while(mpp[s[j]]==0 &&j<s.length()){
                 count++;
                 mpp[s[j]]++;
-                ans=max(ans,j-i+1);
+                
 
                 j++;
             }
+            ans=max(ans,j-i);
             mpp[s[i]]--;
             i++;
         }
