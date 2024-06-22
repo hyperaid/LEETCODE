@@ -11,81 +11,21 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        // ListNode* temp=head;
-        // ListNode* temp1=head;
-        // if(temp->next==NULL) return NULL;
-        // int count=1;
-        // while(temp->next->next!=NULL){
-        //     temp=temp->next;
-        //     count++;
-        //     // cout<<count<<endl;
-        // }
-        // int del=count-n+1;
-        // int countt=1;
-        // if((count+1)==n){ 
-        //     head=head->next;
-            
-        //     return head;}
-        // if(n==1){
-        //     temp->next=NULL;
-        //     return head;
-        // }
-        // else {
-        //     while(countt!=del){
-        //         temp1=temp1->next;
-        //          countt++;
-
-        //     }
-        //     temp1->next=temp1->next->next;
-        //     return head;
-        // }
-        //  ListNode* start = new ListNode();
-        // start -> next = head;
-        // ListNode* fast=start;
-        // ListNode* slow= start;
-        // for(int i=0;i<n;i++){
-        //     fast=fast->next;
-        // }
-        // // if(head==NULL && n==1){
-        // //     return NULL;
-        // // }
-        // while(fast->next!=NULL){
-        //     slow=slow->next;
-        //     fast=fast->next;
-
-        // }
-        // slow->next=slow->next->next;
-        // return start->next;
-        ListNode *slow=head, *fast=head;
-
-        for(int i=0; i<n; i++)
-            fast = fast->next;
-
-        if(!fast)
-        {
-            head = head->next;
-            delete slow;    // Since slow points to the first node
-            return head;
+        int count=0;
+        if(head==NULL) return head;
+        ListNode* temp=new ListNode(1);
+        temp->next=head;
+        while(head){
+            count++;
+            head=head->next;
         }
-        
-        while(fast && fast->next)
-        {
-            fast = fast->next;
-            slow = slow->next;
-        }
+        n=count-n;
+        head=temp;
+        for(int i=0;i<n;i++) head=head->next;
+        head->next=head->next->next;
 
-        // if(slow && slow->next)
-        // {
-            // ListNode* temp = slow->next;
-            slow->next = slow->next->next;
-            // delete temp;
-        // }
-
-        return head;
-       
-        
-        
-
+        cout<<count<<"  "<<n;
+        // temp->next=temp->next->next;
+        return temp->next;
     }
-
 };
