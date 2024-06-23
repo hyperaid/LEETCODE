@@ -1,57 +1,33 @@
 class Solution {
 public:
     int longestSubarray(vector<int>& nums, int limit) {
-        // int i=0;
-        // int j=0;
-        // int maxlen=0;
-        // int maxdiff=0;
-        // pair<int,int> maxele={nums[j],0};
-        // // priority_queue<int>pq;
-        // // set<int>
-        // while(i<=j &&j<nums.size()){
-        //     maxdiff=max(maxdiff,abs(nums[j]-maxele.first));
-        //     maxele=max(maxele,{nums[j],j});
-        //     if(maxdiff<=limit){
-        //         maxlen=max(maxlen,j-i+1);
-        //         if(nums[j]>maxele.first) maxele={nums[j],j};
-        //         j++;
-        //     }
-        //     else{
-        //         // while(maxdiff>limit && i<=j){
-        //         //     maxdiff=nums[maxele.second+1]
-        //         //     i=maxele.second+1;
-        //         //     if(abs(nums[i]-nums[j])<=limit){
-        //         //         maxdiff=abs(nums[i]-nums[j]);
-        //         //     }
-        //         //     // maxdiff=max(maxdiff,abs(nums[j]-nums[i])); 
-
-        //         // }
-        //         i=maxele.second+1;
-        //         j=i;
-        //         maxele={nums[i],i};
-        //         maxdiff=0;
-
-        //     }
+        deque<pair<int,int>>maxheap;
+        deque<pair<int,int>>minheap;
         int i=0;
         int j=0;
         int maxlen=0;
-        int n= nums.size();
-        multiset<int>s;
+        int n=nums.size();
+        // maxheap.push({nums[i],0});
+        // minheap.push({nums[i],0});
         while(j<n){
-            s.insert(nums[j]);
-            int diff=*s.rbegin()-*s.begin();
+            while(!minheap.empty() && minheap.back().first>nums[j]) minheap.pop_back();
+            minheap.push_back({nums[j],j});
+            while(!maxheap.empty() && maxheap.back().first<nums[j]) maxheap.pop_back();
+            maxheap.push_back({nums[j],j});
+            int diff=maxheap.front().first-minheap.front().first;
             while(i<j && diff>limit){
-                auto it=s.find(nums[i]);
-                s.erase(it);
-                diff=*s.rbegin()-*s.begin();
-                i++;
+                i=min(minheap.front().second,maxheap.front().second)+1;
+                while(!maxheap.empty() && maxheap.front().second<i) maxheap.pop_front();
+                while(!minheap.empty() && minheap.front().second<i) minheap.pop_front();
+
+                diff=maxheap.front().first-minheap.front().first;
+
             }
             maxlen=max(maxlen,j-i+1);
             j++;
+
+
         }
-
-
-        
         return maxlen;
     }
 };
