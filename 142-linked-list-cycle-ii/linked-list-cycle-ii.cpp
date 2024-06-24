@@ -28,6 +28,7 @@ public:
         while(temp!=slow){
             temp=temp->next;
             slow=slow->next;
+            cout<<slow->val<<"  "<<temp->val<<endl;
             if(temp==slow) break;
         }
 
